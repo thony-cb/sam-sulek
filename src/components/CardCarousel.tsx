@@ -106,7 +106,7 @@ const CardCarousel: React.FC = () => {
           },
         }),
         cycleDuration = spacing * items.length,
-        dur: number;
+        dur!: number;
 
       // Create the raw sequence by animating each item
       items
@@ -159,7 +159,7 @@ const CardCarousel: React.FC = () => {
       );
       return tl;
     }
-    function getCurrentCardIndex(offset) {
+    function getCurrentCardIndex(offset: any) {
       const totalCards = cards.length;
       const progress = offset / seamlessLoop.duration();
       const index = Math.round(progress * totalCards) % totalCards;
@@ -179,8 +179,6 @@ const CardCarousel: React.FC = () => {
       },
       onDragEnd() {
         setCurrentImageIndex(getCurrentCardIndex(playhead.offset)); //Update current image index
-        console.log(`iteration ${iteration}`);
-        console.log(`playhead ${getCurrentCardIndex(playhead.offset)}`);
         scrollToOffset(scrub.vars.offset);
       },
     });
@@ -188,9 +186,14 @@ const CardCarousel: React.FC = () => {
     // Cleanup function to remove event listeners and instances
     return () => {
       ScrollTrigger.killAll();
-      Draggable.get(".drag-proxy")?.[0]?.kill();
+      const draggableInstances = Draggable.get(".drag-proxy");
+      if (Array.isArray(draggableInstances)) {
+        draggableInstances.forEach((instance) => instance.kill());
+      } else {
+        draggableInstances?.kill();
+      }
     };
-  }, []);
+  }, [currentImageIndex]);
 
   // JSX structure of the component
   return (
