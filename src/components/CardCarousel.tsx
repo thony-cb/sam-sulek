@@ -18,7 +18,6 @@ const CardCarousel: React.FC = () => {
     const cards = gsap.utils.toArray<HTMLLIElement>(".cards li"); // Convert cards to an array
     const playhead = { offset: 0 }; // Proxy object to simulate the playhead position
 
-    console.log(currentImageIndex);
     // Build the seamless loop animation
     const seamlessLoop = buildSeamlessLoop(cards, spacing, animateFunc);
     const wrapTime = gsap.utils.wrap(0, seamlessLoop.duration()); // Wraps the playhead within the duration
@@ -193,7 +192,7 @@ const CardCarousel: React.FC = () => {
         draggableInstances?.kill();
       }
     };
-  }, [currentImageIndex]);
+  }, []);
 
   // JSX structure of the component
   return (
@@ -202,7 +201,7 @@ const CardCarousel: React.FC = () => {
       className="gallery absolute w-full top-0 left-0 flex  h-screen overflow-x-hidden"
     >
       <MainImage ImageIndex={currentImageIndex} />
-      <ul className="cards absolute w-[25vw] lg:w-[10vw] aspect-video  top-[90vh] left-[50%]  -translate-x-1/2 -translate-y-1/2">
+      <ul className="cards absolute w-[25vw] lg:w-[10vw] aspect-video  top-[80vh] left-[50%]  -translate-x-1/2 -translate-y-1/2">
         {images.map((image, index) => (
           <li
             key={index}
@@ -211,15 +210,15 @@ const CardCarousel: React.FC = () => {
             <Image
               className="w-full h-full object-cover pointer-events-none"
               src={image.src}
-              width={image.width}
-              height={image.height}
+              width={1280}
+              height={720}
               alt={image.alt}
               title={image.title}
             />
           </li>
         ))}
       </ul>
-      <div className="active-img-indicator absolute pointer-events-none w-[27vw] lg:w-[11vw] aspect-video top-[90vh] left-[50%] -translate-x-1/2 -translate-y-1/2 border-white border-[0.05rem] rounded-sm  mix-blend-difference z-[2px]"></div>
+      <div className="active-img-indicator absolute pointer-events-none w-[27vw] lg:w-[11vw] aspect-video top-[80vh] left-[50%] -translate-x-1/2 -translate-y-1/2 border-white border-[0.05rem] rounded-sm  mix-blend-difference z-[2px]"></div>
       <div className="drag-proxy hidden absolute"></div>
     </div>
   );
