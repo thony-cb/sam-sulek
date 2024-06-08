@@ -201,7 +201,7 @@ const CardCarousel: React.FC = () => {
       className="gallery absolute w-full top-0 left-0 flex  h-screen overflow-x-hidden"
     >
       <MainImage ImageIndex={currentImageIndex} />
-      <ul className="cards absolute w-[25vw] lg:w-[10vw] aspect-video  top-[80vh] left-[50%]  -translate-x-1/2 -translate-y-1/2">
+      <ul className="cards absolute w-[25vw] lg:w-[10vw] aspect-video  top-[80vh] lg:top-[90vh] left-[50%]  -translate-x-1/2 -translate-y-1/2">
         {images.map((image, index) => (
           <li
             key={index}
@@ -218,7 +218,7 @@ const CardCarousel: React.FC = () => {
           </li>
         ))}
       </ul>
-      <div className="active-img-indicator absolute pointer-events-none w-[27vw] lg:w-[11vw] aspect-video top-[80vh] left-[50%] -translate-x-1/2 -translate-y-1/2 border-white border-[0.05rem] rounded-sm  mix-blend-difference z-[2px]"></div>
+      <div className="active-img-indicator absolute pointer-events-none w-[27vw] lg:w-[11vw] aspect-video top-[80vh] lg:top-[90vh] left-[50%] -translate-x-1/2 -translate-y-1/2 border-white border-[0.05rem] rounded-sm  mix-blend-difference z-[2px]"></div>
       <div className="drag-proxy hidden absolute"></div>
     </div>
   );
