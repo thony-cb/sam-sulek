@@ -6,6 +6,7 @@ import { Draggable } from "gsap/Draggable";
 import Image from "next/image";
 import MainImage from "./MainImage";
 import { images } from "@/lib/config";
+import { cn } from "@/lib/utils";
 
 gsap.registerPlugin(ScrollTrigger, Draggable);
 const CardCarousel: React.FC = () => {
@@ -209,7 +210,10 @@ const CardCarousel: React.FC = () => {
             className="w-full h-full cursor-grabbing  top-0 left-0 absolute"
           >
             <Image
-              className="w-full h-full object-cover pointer-events-none"
+              className={cn(
+                "w-full h-fullobject-cover pointer-events-none",
+                currentImageIndex === index ? "   opacity-90 " : "opacity-40"
+              )}
               src={image.src}
               width={1280}
               height={720}

@@ -5,20 +5,39 @@ import { AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 
 export default function Home() {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isActive, setIsActive] = useState(true);
 
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setIsActive(false);
+  //     document.body.style.cursor = "default";
+  //   }, 7000);
+
+  //   return () => {};
   useEffect(() => {
-    setTimeout(() => {
-      setIsLoading(false);
-      document.body.style.cursor = "default";
-    }, 7000);
+    if (isActive) {
+      document.body.style.overflow = "hidden";
+      document.body.style.cursor = "wait"; // Set cursor to wait
 
-    return () => {};
-  }, []);
+      const cursorTimeout = setTimeout(() => {
+        document.body.style.cursor = "default"; // Set cursor to default after 3 seconds
+      }, 4000);
+
+      return () => {
+        clearTimeout(cursorTimeout);
+        document.body.style.overflow = "auto";
+        document.body.style.cursor = "default"; // Ensure cursor is reset on cleanup
+      };
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  }, [isActive]);
 
   return (
     <div className="h-screen w-full">
-      <AnimatePresence>{isLoading ? <PreLoader /> : null}</AnimatePresence>
+      <AnimatePresence>
+        {isActive ? <PreLoader setIsActive={setIsActive} /> : null}
+      </AnimatePresence>
       <CardCarousel />
     </div>
   );
