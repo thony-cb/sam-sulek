@@ -1,9 +1,16 @@
+"use client";
 import Link from "next/link";
 import React from "react";
+import { motion } from "framer-motion";
 
 export default function Navbar() {
   return (
-    <nav className="w-full flex fixed  max-w-[85vw] lg:max-w-[95vw] mx-auto  z-20 text-sm lg:text-lg font-bol flex-row items-center py-4 justify-between">
+    <motion.nav
+      variants={navbarAnimation}
+      initial="inactive"
+      animate="active"
+      className="w-full flex fixed  max-w-[85vw] lg:max-w-[95vw] mx-auto  z-20 text-sm lg:text-lg font-bol flex-row items-center py-4 justify-between"
+    >
       <Link className="" href="/">
         Sam Sulek
       </Link>
@@ -11,6 +18,18 @@ export default function Navbar() {
         <Link href={"/"}>Gallery</Link>
         <Link href="/info">Info</Link>
       </div>
-    </nav>
+    </motion.nav>
   );
 }
+
+const navbarAnimation = {
+  active: {
+    y: 0,
+    backgroundColor: "#f00",
+  },
+  inactive: {
+    y: 10,
+    backgroundColor: "#fff",
+    transition: { duration: 2 },
+  },
+};
