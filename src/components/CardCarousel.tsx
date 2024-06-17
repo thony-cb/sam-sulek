@@ -219,7 +219,7 @@ const CardCarousel: React.FC = () => {
               height={720}
               alt={image.alt}
               title={image.title}
-              priority={index === 1 ? true : false}
+              priority
             />
           </li>
         ))}
