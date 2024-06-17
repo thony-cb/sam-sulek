@@ -3,7 +3,7 @@ import React from "react";
 
 export default function page() {
   return (
-    <section className="flex flex-col lg:flex-row justify-start gap-20 text-sm lg:text-md pt-20 w-full min-h-screen">
+    <section className="flex flex-col px-10 lg:flex-row justify-start gap-20 text-sm lg:text-md pt-20 w-full min-h-screen">
       <div className="flex flex-col gap-3 ">
         <h1 className="font-bold">About</h1>
         <p>Sam Sulek is a Hosstile Athlete Use code: SAM</p>
