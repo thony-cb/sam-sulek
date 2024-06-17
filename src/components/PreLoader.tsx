@@ -1,8 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import SamSVG from "./SamSVG";
-import { animate } from "framer-motion/dom";
-import { useAnimate, usePresence, motion, Variants } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import { Button } from "./ui/button";
 import usePreloaderStore from "@/lib/AnimationStore";
 

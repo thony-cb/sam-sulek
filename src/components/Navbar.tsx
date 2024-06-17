@@ -1,9 +1,8 @@
 "use client";
 import Link from "next/link";
 import React, { useEffect } from "react";
-import { motion, useAnimate, useAnimation } from "framer-motion";
+import { motion, useAnimation } from "framer-motion";
 import usePreloaderStore from "@/lib/AnimationStore";
-import { Button } from "./ui/button";
 
 export default function Navbar() {
   const { isActive } = usePreloaderStore();

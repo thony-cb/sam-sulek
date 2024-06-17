@@ -3,7 +3,7 @@ import CardCarousel from "@/components/CardCarousel";
 import PreLoader from "@/components/PreLoader";
 import usePreloaderStore from "@/lib/AnimationStore";
 import { AnimatePresence } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 export default function Home() {
   const { isActive, setIsActive } = usePreloaderStore();
