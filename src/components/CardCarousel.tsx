@@ -211,7 +211,7 @@ const CardCarousel: React.FC = () => {
           >
             <Image
               className={cn(
-                "w-full h-fullobject-cover pointer-events-none",
+                "w-full h-full object-cover pointer-events-none",
                 currentImageIndex === index ? "   opacity-90 " : "opacity-40"
               )}
               src={image.src}
@@ -219,6 +219,7 @@ const CardCarousel: React.FC = () => {
               height={720}
               alt={image.alt}
               title={image.title}
+              priority={index === 1 ? true : false}
             />
           </li>
         ))}

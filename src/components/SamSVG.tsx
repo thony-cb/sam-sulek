@@ -7,6 +7,7 @@ const SamSVG: React.FC<SamSVGProps> = (props) => (
     xmlns="http://www.w3.org/2000/svg"
     width={1416}
     height={721}
+    // viewBox="0 0 1208 663" // Replace with your SVG's viewBox values
     fill="black"
     {...props}
   >

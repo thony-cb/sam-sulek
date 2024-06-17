@@ -5,10 +5,19 @@ import { motion, Variants } from "framer-motion";
 import { Button } from "./ui/button";
 import usePreloaderStore from "@/lib/AnimationStore";
 import { AnimatedWord } from "./AnimatedWord";
+import { useMediaQuery } from "@/lib/useMediaQuery";
+// import { useMediaQuery } from "usehooks-ts";
 
 const PreLoader: React.FC = () => {
   const { setIsActive } = usePreloaderStore();
   const [isMuted, setIsMuted] = useState(true);
+  const heights = {
+    small: ["0%", "10%", "50%", "60%", "50%", "40%", "0%"],
+    large: ["0%", "10%", "50%", "90%", "50%", "40%", "0%"],
+  };
+
+  // const isMedium = useMediaQuery("(min-width: 768px)");
+  const isLarge = useMediaQuery("(min-width: 480px)");
 
   const handleMuteToggle = () => {
     setIsMuted((prev) => !prev);
@@ -21,7 +30,7 @@ const PreLoader: React.FC = () => {
       audio.play().catch((error) => {
         console.log("Autoplay was prevented:", error);
       });
-
+      console.log(isLarge);
       audio.addEventListener("ended", () => {
         setIsActive(false);
       });
@@ -46,14 +55,11 @@ const PreLoader: React.FC = () => {
           key="background"
           className="h-full bg-primary origin-bottom w-full"
           animate={{
-            height: ["0%", "10%", "50%", "90%", "50%", "40%", "0%"],
+            height: isLarge ? heights.small : heights.large,
           }}
           transition={{
             duration: 5,
             ease: "easeInOut",
-            // times: [0, 0.2, 0.3, 0.4, 0.6, 0.8, 1],
-            // repeat: 2,
-            // repeatDelay: 1,
           }}
         ></motion.div>
       </div>
@@ -72,18 +78,18 @@ const PreLoader: React.FC = () => {
           [ Enter ]
         </Button>
       </motion.div>
-      <SamSVG className="absolute" />
-      <h1 className="text-[12rem] tracking-[-1.4rem] absolute left-10 bottom-30">
+      <SamSVG className="absolute scale-[40%] md:scale-[60%] lg:scale-[100%]" />
+      <h1 className="text-[8rem] lg:text-[12rem] tracking-[-0.6rem] lg:tracking-[-1.4rem] absolute left-10 lg:bottom-40 top-40">
         <AnimatedWord word="Sam" />
       </h1>
-      <h1 className="text-5xl absolute text-[12rem] tracking-[-1.4rem] right-10 bottom-0">
+      <h1 className="absolute text-[8rem] lg:text-[12rem] tracking-[-0.6rem] lg:tracking-[-1.4rem] right-10 lg:bottom-0 bottom-20">
         {" "}
         <AnimatedWord word="Sulek" />
       </h1>
       <audio id="intro-audio" src="/audio/SamSulekIntro.m4a" autoPlay />
       <button
         onClick={handleMuteToggle}
-        className="absolute bottom-10 left-10 text-white"
+        className="absolute bottom-28 lg:bottom-10 left-10 text-white"
       >
         {isMuted ? "Unmute" : "Mute"}
       </button>
