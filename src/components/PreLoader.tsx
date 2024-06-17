@@ -1,15 +1,39 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import SamSVG from "./SamSVG";
 import { animate } from "framer-motion/dom";
 import { useAnimate, usePresence, motion, Variants } from "framer-motion";
 import { Button } from "./ui/button";
+import usePreloaderStore from "@/lib/AnimationStore";
 
-interface PreLoaderProps {
-  setIsActive: React.Dispatch<React.SetStateAction<boolean>>;
-}
+const PreLoader: React.FC = () => {
+  const { setIsActive } = usePreloaderStore();
+  const [isMuted, setIsMuted] = useState(true);
 
-const PreLoader: React.FC<PreLoaderProps> = ({ setIsActive }) => {
+  const handleMuteToggle = () => {
+    setIsMuted((prev) => !prev);
+  };
+
+  useEffect(() => {
+    const audio = document.getElementById("intro-audio") as HTMLAudioElement;
+    if (audio) {
+      audio.muted = isMuted;
+      audio.play().catch((error) => {
+        console.log("Autoplay was prevented:", error);
+      });
+
+      audio.addEventListener("ended", () => {
+        setIsActive(false);
+      });
+
+      return () => {
+        audio.removeEventListener("ended", () => {
+          setIsActive(false);
+        });
+      };
+    }
+  }, [isMuted]);
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -29,7 +53,7 @@ const PreLoader: React.FC<PreLoaderProps> = ({ setIsActive }) => {
             ease: "easeInOut",
             // times: [0, 0.2, 0.3, 0.4, 0.6, 0.8, 1],
             // repeat: 2,
-            repeatDelay: 1,
+            // repeatDelay: 1,
           }}
         ></motion.div>
       </div>
@@ -56,6 +80,13 @@ const PreLoader: React.FC<PreLoaderProps> = ({ setIsActive }) => {
         {" "}
         <Word word="Sulek" />
       </h1>
+      <audio id="intro-audio" src="/audio/SamSulekIntro.m4a" autoPlay />
+      <button
+        onClick={handleMuteToggle}
+        className="absolute bottom-10 left-10 text-white"
+      >
+        {isMuted ? "Unmute" : "Mute"}
+      </button>
     </motion.div>
   );
 };
