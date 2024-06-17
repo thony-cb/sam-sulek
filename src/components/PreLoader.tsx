@@ -4,6 +4,7 @@ import SamSVG from "./SamSVG";
 import { motion, Variants } from "framer-motion";
 import { Button } from "./ui/button";
 import usePreloaderStore from "@/lib/AnimationStore";
+import { AnimatedWord } from "./AnimatedWord";
 
 const PreLoader: React.FC = () => {
   const { setIsActive } = usePreloaderStore();
@@ -73,11 +74,11 @@ const PreLoader: React.FC = () => {
       </motion.div>
       <SamSVG className="absolute" />
       <h1 className="text-[12rem] tracking-[-1.4rem] absolute left-10 bottom-30">
-        <Word word="Sam" />
+        <AnimatedWord word="Sam" />
       </h1>
       <h1 className="text-5xl absolute text-[12rem] tracking-[-1.4rem] right-10 bottom-0">
         {" "}
-        <Word word="Sulek" />
+        <AnimatedWord word="Sulek" />
       </h1>
       <audio id="intro-audio" src="/audio/SamSulekIntro.m4a" autoPlay />
       <button
@@ -90,10 +91,6 @@ const PreLoader: React.FC = () => {
   );
 };
 export default PreLoader;
-// Define the interface for the component props
-interface AnimatedLetters {
-  word: string;
-}
 
 // Define the animation variants
 const AnimatedButtonAnimation: Variants = {
@@ -108,57 +105,4 @@ const AnimatedButtonAnimation: Variants = {
     y: -300,
     transition: { ease: "easeOut", duration: 3 },
   },
-};
-// Define the animation variants
-const AnimatedLetterAnimation: Variants = {
-  initial: { opacity: 0, y: 50 },
-  animate: {
-    opacity: 1,
-    y: 0,
-    transition: { ease: "easeIn", duration: 0.4 },
-  },
-  exit: {
-    opacity: "40%",
-    y: -300,
-    transition: { ease: "easeOut", duration: 3 },
-  },
-};
-// Define the animation variants for the parent
-const AnimatedWordAnimation: Variants = {
-  initial: {},
-  animate: {
-    transition: {
-      delayChildren: 5,
-      staggerChildren: 0.1,
-    },
-  },
-  exit: {
-    transition: {
-      duration: 3,
-    },
-  },
-};
-
-// Define the Word component
-const Word: React.FC<AnimatedLetters> = ({ word }) => {
-  return (
-    <motion.span
-      key={`${word}`}
-      variants={AnimatedWordAnimation}
-      initial="initial"
-      animate="animate"
-      exit="exit"
-      className="inline-flex"
-    >
-      {[...word].map((letter, index) => (
-        <motion.span
-          key={index}
-          variants={AnimatedLetterAnimation}
-          className="inline-block" // Ensure spans are inline-block for proper spacing
-        >
-          {letter}
-        </motion.span>
-      ))}
-    </motion.span>
-  );
 };
