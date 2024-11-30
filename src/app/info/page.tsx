@@ -30,7 +30,7 @@ export default function page() {
           <a
             target="_blank"
             className="flex flex-row hover:underline items-center gap-2"
-            href="https://cabrera-site-2.vercel.app/"
+            href="https://www.instagram.com/diego__cb/"
           >
             Diego Cabrera <ArrowTopRightIcon />
           </a>
